@@ -42,6 +42,15 @@ And just in case you want to change `host` and/or `port` using environment varia
 Made some changes chaning from public to private on some variables and methods.
 Also if a method/variable is public type must be annotated. 
 
+### (6) New package "api"
+
+I'm starting to rearrange object and classes in the project.
+For the sake of this exercise I'm going to remove `realTimeBiddingAgent` from the path of the packages.
+(It doesn't mean the name it's wrong)
+
+I've moved file 'Main.scala' under a new `api` package.
+Also file `CampaignRoutes` under `api/routes` package.
+
 ## Original readme.md file
 
 1) Main Class is in Main.scala 

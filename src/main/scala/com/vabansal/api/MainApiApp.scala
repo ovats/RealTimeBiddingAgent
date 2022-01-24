@@ -1,15 +1,15 @@
-package com.vabansal
+package com.vabansal.api
 
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Route
-import com.vabansal.realTimeBiddingAgent.controller.CampaignRoutes
+import com.vabansal.api.routes.CampaignRoutes
 import com.vabansal.realTimeBiddingAgent.service.CampaignBiddingService
 
 import scala.util.{Failure, Success}
 
-object Main {
+object MainApiApp {
 
   private def startServer(routes: Route)(implicit actorSystem: ActorSystem[_]): Unit = {
     import actorSystem.executionContext

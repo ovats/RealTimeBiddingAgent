@@ -4,7 +4,7 @@ import akka.actor.testkit.typed.scaladsl.ActorTestKit
 import akka.http.scaladsl.marshalling.Marshal
 import akka.http.scaladsl.model.{ContentTypes, MessageEntity, StatusCodes}
 import akka.http.scaladsl.testkit.ScalatestRouteTest
-import com.vabansal.realTimeBiddingAgent.controller.CampaignRoutes
+import com.vabansal.api.routes.CampaignRoutes
 import com.vabansal.realTimeBiddingAgent.domain.Domain._
 import com.vabansal.realTimeBiddingAgent.service.CampaignBiddingService
 import org.scalatest.concurrent.ScalaFutures

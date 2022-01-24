@@ -51,6 +51,11 @@ For the sake of this exercise I'm going to remove `realTimeBiddingAgent` from th
 I've moved file 'Main.scala' under a new `api` package.
 Also file `CampaignRoutes` under `api/routes` package.
 
+### (7) Move sample files (json) to a different directory
+
+I moved both files `sampleRequest.json` and `sampleResponse.json` to a `doc/samples` directory.
+These files are not part of the code of the service.
+
 ## Original readme.md file
 
 1) Main Class is in Main.scala 

@@ -62,6 +62,8 @@ New package `common` for classes that other components may use, as for example `
 'JsonFormats' can not be part of the domain. If in the future you change the implementation and "formats" are not needed anymore you should not change domain classes.
 Also in `Domain` object is not a good idea to mention `StatusCodes` from `Akka Http`.
 
+### (9) Added graceful termination in actors-akka implementation
+
 ## Original readme.md file
 
 1) Main Class is in Main.scala 

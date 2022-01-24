@@ -1,12 +1,13 @@
-package com.vabansal.realTimeBiddingAgent.domain
+package com.vabansal.common.formats
 
+import com.vabansal.common.domain.Domain
 import spray.json.DefaultJsonProtocol
 
 object JsonFormats {
   import DefaultJsonProtocol._
 
   implicit val targetingJsonFormat   = jsonFormat1(Domain.Targeting)
-  implicit val bannerJsonFormart     = jsonFormat4(Domain.Banner)
+  implicit val bannerJsonFormat      = jsonFormat4(Domain.Banner)
   implicit val campaignJsonFormat    = jsonFormat5(Domain.Campaign)
   implicit val geoJsonFormat         = jsonFormat1(Domain.Geo)
   implicit val deviceJsonFormat      = jsonFormat2(Domain.Device)

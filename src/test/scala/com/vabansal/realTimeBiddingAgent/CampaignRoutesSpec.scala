@@ -5,8 +5,8 @@ import akka.http.scaladsl.marshalling.Marshal
 import akka.http.scaladsl.model.{ContentTypes, MessageEntity, StatusCodes}
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import com.vabansal.api.routes.CampaignRoutes
-import com.vabansal.realTimeBiddingAgent.domain.Domain._
-import com.vabansal.realTimeBiddingAgent.service.CampaignBiddingService
+import com.vabansal.common.domain.Domain._
+import com.vabansal.common.service.CampaignBiddingService
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
@@ -21,7 +21,7 @@ class CampaignRoutesSpec extends AnyWordSpec with Matchers with ScalaFutures wit
 
   //TODO move imports to the top
   import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
-  import com.vabansal.realTimeBiddingAgent.domain.JsonFormats._
+  import com.vabansal.common.formats.JsonFormats._
 
   private val campaignRegistry = testKit.spawn(CampaignBiddingService())
   private lazy val routes      = new CampaignRoutes(campaignRegistry).bidRoutes

@@ -56,6 +56,12 @@ Also file `CampaignRoutes` under `api/routes` package.
 I moved both files `sampleRequest.json` and `sampleResponse.json` to a `doc/samples` directory.
 These files are not part of the code of the service.
 
+### (8) New package "common"
+
+New package `common` for classes that other components may use, as for example `api` use classes from domain package.
+'JsonFormats' can not be part of the domain. If in the future you change the implementation and "formats" are not needed anymore you should not change domain classes.
+Also in `Domain` object is not a good idea to mention `StatusCodes` from `Akka Http`.
+
 ## Original readme.md file
 
 1) Main Class is in Main.scala 

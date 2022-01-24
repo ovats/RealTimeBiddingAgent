@@ -1,10 +1,10 @@
-package com.vabansal.realTimeBiddingAgent.service
+package com.vabansal.common.service
 
 import akka.actor.typed.{ActorRef, Behavior}
 import akka.actor.typed.scaladsl.Behaviors
 import akka.event.slf4j.Logger
-import com.vabansal.realTimeBiddingAgent.domain.Domain.{BidRequest, RouteResponse}
-import com.vabansal.realTimeBiddingAgent.repository.CampaignRepository
+import com.vabansal.common.data.CampaignRepository
+import com.vabansal.common.domain.Domain.{BidRequest, RouteResponse}
 import org.slf4j.LoggerFactory
 
 object CampaignBiddingService {

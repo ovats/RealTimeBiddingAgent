@@ -1,4 +1,4 @@
-package com.vabansal.realTimeBiddingAgent.controller
+package com.vabansal.api.routes
 
 import akka.actor.typed.scaladsl.AskPattern.{Askable, _}
 import akka.actor.typed.{ActorRef, ActorSystem}

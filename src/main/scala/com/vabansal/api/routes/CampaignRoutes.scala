@@ -8,13 +8,13 @@ import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import akka.util.Timeout
 import com.vabansal.common.domain.Domain.{BidRequest, RouteResponse}
-import com.vabansal.common.formats.JsonFormats._
-import com.vabansal.common.service.CampaignBiddingService
-import com.vabansal.common.service.CampaignBiddingService.GetMatchingBidCampaign
+import com.vabansal.common.json.JsonFormats._
+import com.vabansal.common.actor.CampaignActor
+import com.vabansal.common.actor.CampaignActor.GetMatchingBidCampaign
 
 import scala.concurrent.Future
 
-class CampaignRoutes(campaignBiddingActor: ActorRef[CampaignBiddingService.Command])(implicit
+class CampaignRoutes(campaignBiddingActor: ActorRef[CampaignActor.Command])(implicit
     val system: ActorSystem[_]
 ) {
 

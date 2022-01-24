@@ -64,6 +64,11 @@ Also in `Domain` object is not a good idea to mention `StatusCodes` from `Akka H
 
 ### (9) Added graceful termination in actors-akka implementation
 
+### (10) Services vs Actors
+
+I have renamed class 'CampaignBiddingService' because it is an Actor.
+Also changed the name of the package to 'actor'.
+
 ## Original readme.md file
 
 1) Main Class is in Main.scala 

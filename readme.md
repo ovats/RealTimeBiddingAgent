@@ -15,8 +15,14 @@ It's not mandatory. But it's a good idea to have the code properly formatted.
 I use [scalfmt](https://scalameta.org/scalafmt/) plugin.
 It adds new tasks in `sbt`, for example:
 
-- `sbt scalafmrCheckAll`: to check if sources are formatted 
+- `sbt scalafmtCheckAll`: to check if sources are formatted
 - `sbt scalafmtAll`: apply format to sources
+
+### (3) Dependencies in `build.sbt`
+
+A good practice is to define dependencies out of `build.sbt` to keep it clean.
+I've created the file `/project/Dependencies.scala` for that.
+To keep consistency I've created variables for `logback` and `scalatest` libraries versions.
 
 ## Original readme.md file
 

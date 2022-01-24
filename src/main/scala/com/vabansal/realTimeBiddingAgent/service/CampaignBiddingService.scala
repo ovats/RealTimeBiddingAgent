@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory
 
 object CampaignBiddingService {
 
-  val logger = Logger.apply(CampaignBiddingService.getClass, "")
+  private val logger = Logger.apply(CampaignBiddingService.getClass, "")
 
   sealed trait Command
 
@@ -19,7 +19,7 @@ object CampaignBiddingService {
     Behaviors.receiveMessage {
 
       case GetMatchingBidCampaign(bidRequest, replyTo) =>
-        logger.info(s"Received Get Matching Bid Request ${bidRequest}")
+        logger.info(s"Received Get Matching Bid Request $bidRequest")
         replyTo ! CampaignRepository.validateAndGetMatchingBidCampaign(bidRequest)
         Behaviors.same
     }

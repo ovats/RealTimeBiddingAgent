@@ -37,6 +37,11 @@ And just in case you want to change `host` and/or `port` using environment varia
     host = ${?HTTP_PORT}
 ```
 
+### (5) Definitions of public/private variables/methods
+
+Made some changes chaning from public to private on some variables and methods.
+Also if a method/variable is public type must be annotated. 
+
 ## Original readme.md file
 
 1) Main Class is in Main.scala 

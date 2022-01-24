@@ -1,5 +1,6 @@
 package com.vabansal.realTimeBiddingAgent.domain
 
+//TODO this is not part of a domain
 import akka.http.scaladsl.model.StatusCode
 
 object Domain {
@@ -38,6 +39,7 @@ object Domain {
 
   case class BidResponse(id: String, bidRequestId: String, price: Double, adid: Option[String], banner: Option[Banner])
 
+  //TODO this is not part of a domain
   case class RouteResponse(status: StatusCode, response: Option[BidResponse])
 
 }

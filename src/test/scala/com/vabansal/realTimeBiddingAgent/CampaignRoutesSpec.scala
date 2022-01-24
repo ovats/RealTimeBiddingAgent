@@ -13,9 +13,9 @@ import org.scalatest.wordspec.AnyWordSpec
 
 class CampaignRoutesSpec extends AnyWordSpec with Matchers with ScalaFutures with ScalatestRouteTest {
 
-  lazy val testKit = ActorTestKit()
+  private lazy val testKit = ActorTestKit()
 
-  implicit def typedSystem = testKit.system
+  private implicit def typedSystem = testKit.system
 
   override def createActorSystem(): akka.actor.ActorSystem = testKit.system.classicSystem
 
@@ -23,10 +23,10 @@ class CampaignRoutesSpec extends AnyWordSpec with Matchers with ScalaFutures wit
   import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
   import com.vabansal.realTimeBiddingAgent.domain.JsonFormats._
 
-  val campaignRegistry = testKit.spawn(CampaignBiddingService())
-  lazy val routes      = new CampaignRoutes(campaignRegistry).bidRoutes
+  private val campaignRegistry = testKit.spawn(CampaignBiddingService())
+  private lazy val routes      = new CampaignRoutes(campaignRegistry).bidRoutes
 
-  val validBidRequest = BidRequest(
+  private val validBidRequest = BidRequest(
     id = "SGu1Jpq1IO",
     site = Site(
       id = "0006a522ce0f4bbbbaa6b3c38cafaa0f",
@@ -68,7 +68,7 @@ class CampaignRoutesSpec extends AnyWordSpec with Matchers with ScalaFutures wit
     ),
   )
 
-  val validBidRequest2 = BidRequest(
+  private val validBidRequest2 = BidRequest(
     id = "SGu1Jpq1IO",
     site = Site(
       id = "0006a522ce0f4bbbbaa6b3c38cafaa0f",
@@ -110,7 +110,7 @@ class CampaignRoutesSpec extends AnyWordSpec with Matchers with ScalaFutures wit
     ),
   )
 
-  val invalidBidRequest = BidRequest(
+  private val invalidBidRequest = BidRequest(
     id = "SGu1Jpq1IO",
     site = Site(
       id = "0006a522ce0f4bbbbaa6b3c38cafaa0f",
@@ -156,7 +156,7 @@ class CampaignRoutesSpec extends AnyWordSpec with Matchers with ScalaFutures wit
 
   }
 
-  "device geo should get higher priority that user geo " in {
+  "device geo should get higher priority that user geo" in {
     val bidRequestEntity = Marshal(validBidRequest2).to[MessageEntity].futureValue
     val request          = Post("/bidCampaign").withEntity(bidRequestEntity)
 
@@ -164,6 +164,7 @@ class CampaignRoutesSpec extends AnyWordSpec with Matchers with ScalaFutures wit
       status should ===(StatusCodes.OK)
 
       contentType should ===(ContentTypes.`application/json`)
+
       entityAs[String] should ===(
         """{"adid":"1000","banner":{"height":250,"id":2,"src":"https://business.eskimi.com/wp-content/uploads/2020/06/CHN.jpeg","width":300},"bidRequestId":"SGu1Jpq1IO","id":"1800458939","price":3.12123}"""
       )
@@ -171,7 +172,7 @@ class CampaignRoutesSpec extends AnyWordSpec with Matchers with ScalaFutures wit
 
   }
 
-  "must return status code 204 on receiving invalid bid request " in {
+  "must return status code 204 on receiving invalid bid request" in {
     val bidRequestEntity = Marshal(invalidBidRequest).to[MessageEntity].futureValue
     val request          = Post("/bidCampaign").withEntity(bidRequestEntity)
 

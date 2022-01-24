@@ -1,15 +1,15 @@
-package com.vabansal.common.service
+package com.vabansal.common.actor
 
 import akka.actor.typed.{ActorRef, Behavior}
 import akka.actor.typed.scaladsl.Behaviors
 import akka.event.slf4j.Logger
-import com.vabansal.common.data.CampaignRepository
+import com.vabansal.common.db.CampaignRepository
 import com.vabansal.common.domain.Domain.{BidRequest, RouteResponse}
 import org.slf4j.LoggerFactory
 
-object CampaignBiddingService {
+object CampaignActor {
 
-  private val logger = Logger.apply(CampaignBiddingService.getClass, "")
+  private val logger = Logger.apply(CampaignActor.getClass, "")
 
   sealed trait Command
 

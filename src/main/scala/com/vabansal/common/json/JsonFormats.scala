@@ -1,4 +1,4 @@
-package com.vabansal.common.formats
+package com.vabansal.common.json
 
 import com.vabansal.common.domain.Domain
 import spray.json.DefaultJsonProtocol

@@ -5,7 +5,7 @@ import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Route
 import com.vabansal.api.routes.CampaignRoutes
-import com.vabansal.common.service.CampaignBiddingService
+import com.vabansal.common.actor.CampaignActor
 
 import scala.concurrent.ExecutionContextExecutor
 import scala.concurrent.duration._
@@ -47,7 +47,7 @@ object MainApiApp {
   def main(args: Array[String]): Unit = {
 
     val rootBehaviour = Behaviors.setup[Nothing] { context =>
-      val campaignBiddingActor = context.spawn(CampaignBiddingService(), "CampaignBiddingActor")
+      val campaignBiddingActor = context.spawn(CampaignActor(), "CampaignBiddingActor")
       context.watch(campaignBiddingActor)
       val routes = new CampaignRoutes(campaignBiddingActor)(context.system)
       startServer(routes.bidRoutes)(context.system)

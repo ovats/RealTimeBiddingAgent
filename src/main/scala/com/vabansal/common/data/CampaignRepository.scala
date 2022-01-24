@@ -1,8 +1,8 @@
-package com.vabansal.realTimeBiddingAgent.repository
+package com.vabansal.common.data
 
 import akka.event.slf4j.Logger
 import akka.http.scaladsl.model.StatusCodes
-import com.vabansal.realTimeBiddingAgent.domain.Domain._
+import com.vabansal.common.domain.Domain._
 
 object CampaignRepository {
   private val logger = Logger.apply(CampaignRepository.getClass, "")

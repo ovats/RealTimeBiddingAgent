@@ -1,6 +1,5 @@
-package com.vabansal.realTimeBiddingAgent.domain
+package com.vabansal.common.domain
 
-//TODO this is not part of a domain
 import akka.http.scaladsl.model.StatusCode
 
 object Domain {

@@ -5,7 +5,7 @@ import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Route
 import com.vabansal.api.routes.CampaignRoutes
-import com.vabansal.realTimeBiddingAgent.service.CampaignBiddingService
+import com.vabansal.common.service.CampaignBiddingService
 
 import scala.util.{Failure, Success}
 

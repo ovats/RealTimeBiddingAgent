@@ -24,6 +24,19 @@ A good practice is to define dependencies out of `build.sbt` to keep it clean.
 I've created the file `/project/Dependencies.scala` for that.
 To keep consistency I've created variables for `logback` and `scalatest` libraries versions.
 
+### (4) Format in `application.conf`
+
+This file should be formatted accordingly.
+Also for `host` you should use `0.0.0.0` instead of `localhost`.
+If I'm not wrong when using Docker `localhost` will not work.
+And just in case you want to change `host` and/or `port` using environment variables you can add:
+
+```
+    host = ${?HTTP_INTERFACE}
+    ...
+    host = ${?HTTP_PORT}
+```
+
 ## Original readme.md file
 
 1) Main Class is in Main.scala 

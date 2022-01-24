@@ -12,27 +12,31 @@ import com.vabansal.realTimeBiddingAgent.service.CampaignBiddingService
 import com.vabansal.realTimeBiddingAgent.service.CampaignBiddingService.GetMatchingBidCampaign
 
 import scala.concurrent.Future
-class CampaignRoutes(campaignBiddingActor: ActorRef[CampaignBiddingService.Command])(implicit val system: ActorSystem[_]){
+class CampaignRoutes(campaignBiddingActor: ActorRef[CampaignBiddingService.Command])(implicit
+    val system: ActorSystem[_]
+) {
 
-  val logger = Logger.apply(this.getClass , "")
-  private implicit val timeout = Timeout.create(system.settings.config.getDuration("real-time-bidding-agent.routes.ask-timeout"))
+  val logger = Logger.apply(this.getClass, "")
+  private implicit val timeout =
+    Timeout.create(system.settings.config.getDuration("real-time-bidding-agent.routes.ask-timeout"))
 
-  def getMatchingBidCampaign(bidRequest:BidRequest): Future[RouteResponse]= {
-    campaignBiddingActor.ask(GetMatchingBidCampaign(bidRequest , _) )
+  def getMatchingBidCampaign(bidRequest: BidRequest): Future[RouteResponse] = {
+    campaignBiddingActor.ask(GetMatchingBidCampaign(bidRequest, _))
   }
 
-  val bidRoutes = pathPrefix("bidCampaign"){
-  concat(
-    pathEnd{
-      post{
-        entity(as[BidRequest]){ bidRequest =>
-          onSuccess(getMatchingBidCampaign(bidRequest)){response =>
-            logger.info(s"sending response ${response}")
-            complete(response.status , response.response)
-        }}
+  val bidRoutes = pathPrefix("bidCampaign") {
+    concat(
+      pathEnd {
+        post {
+          entity(as[BidRequest]) { bidRequest =>
+            onSuccess(getMatchingBidCampaign(bidRequest)) { response =>
+              logger.info(s"sending response ${response}")
+              complete(response.status, response.response)
+            }
+          }
+        }
       }
-    }
-  )
-}
+    )
+  }
 
 }

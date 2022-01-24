@@ -11,7 +11,6 @@ import scala.util.{Failure, Success}
 
 object Main {
 
-
   private def startServer(routes: Route)(implicit actorSystem: ActorSystem[_]): Unit = {
     import actorSystem.executionContext
 
@@ -23,7 +22,9 @@ object Main {
       case Success(binding) =>
         actorSystem.log.info(s"real-time-bidding-agent started at ${binding.localAddress}")
       case Failure(exception) =>
-        actorSystem.log.error(s"Not able to start real-time-bidding-agent server at ${host}:${port}  ${exception.getMessage}")
+        actorSystem.log.error(
+          s"Not able to start real-time-bidding-agent server at ${host}:${port}  ${exception.getMessage}"
+        )
         actorSystem.terminate()
     }
   }

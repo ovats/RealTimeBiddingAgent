@@ -5,7 +5,7 @@ import akka.http.scaladsl.model.StatusCodes
 import com.vabansal.realTimeBiddingAgent.domain.Domain._
 
 object CampaignRepository {
-  val logger = Logger.apply(CampaignRepository.getClass, "")
+  private val logger = Logger.apply(CampaignRepository.getClass, "")
 
   // format: off
   val activeCampaigns = Seq(
@@ -38,6 +38,7 @@ object CampaignRepository {
   )
   // format: on
 
+  //TODO this method is not part of a repository
   def validateAndGetMatchingBidCampaign(bidRequest: BidRequest): RouteResponse = {
     try {
       if (

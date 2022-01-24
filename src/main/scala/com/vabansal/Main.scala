@@ -23,7 +23,8 @@ object Main {
         actorSystem.log.info(s"real-time-bidding-agent started at ${binding.localAddress}")
       case Failure(exception) =>
         actorSystem.log.error(
-          s"Not able to start real-time-bidding-agent server at ${host}:${port}  ${exception.getMessage}"
+          s"Not able to start real-time-bidding-agent server at $host:$port  ${exception.getMessage}",
+          exception,
         )
         actorSystem.terminate()
     }

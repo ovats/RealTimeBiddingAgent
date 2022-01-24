@@ -9,6 +9,15 @@ Forked from: https://github.com/ivarunbansal/RealTimeBiddingAgent.
 Since I'm using IntelliJ I noted that git wants to add `./bsp` folder to the repo.
 I've update `.gitignore` file with the setting I use.
 
+### (2) Added scalafmt plugin to the project
+
+It's not mandatory. But it's a good idea to have the code properly formatted.
+I use [scalfmt](https://scalameta.org/scalafmt/) plugin.
+It adds new tasks in `sbt`, for example:
+
+- `sbt scalafmrCheckAll`: to check if sources are formatted 
+- `sbt scalafmtAll`: apply format to sources
+
 ## Original readme.md file
 
 1) Main Class is in Main.scala 

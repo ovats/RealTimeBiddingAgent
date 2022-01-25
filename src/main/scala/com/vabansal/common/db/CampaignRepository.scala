@@ -2,42 +2,12 @@ package com.vabansal.common.db
 
 import akka.http.scaladsl.model.StatusCodes
 import com.vabansal.api.routes.RouteResponse
+import com.vabansal.common.db.dummydata.DummyData
 import com.vabansal.common.domain.Domain._
 import org.slf4j.LoggerFactory
 
 object CampaignRepository {
   private val logger = LoggerFactory.getLogger(getClass.getName)
-
-  // format: off
-  val activeCampaigns = Seq(
-    Campaign(id = 1, country = "LT", targeting = Targeting(targetedSiteIds = List("0006a522ce0f4bbbbaa6b3c38cafaa0f")), 
-      banners = List(
-        Banner(id = 1, src = "https://business.eskimi.com/wp-content/uploads/2020/06/openGraph.jpeg", width = 300, height = 250),
-        Banner(id = 2, src = "https://business.eskimi.com/wp-content/uploads/2020/06/openGraph1.jpeg", width = 300, height = 250), 
-        Banner(id = 3, src = "https://business.eskimi.com/wp-content/uploads/2020/06/openGraph2.jpeg", width = 300, height = 250),
-        Banner(id = 4, src = "https://business.eskimi.com/wp-content/uploads/2020/06/openGraph3.jpeg", width = 3000, height = 2500)
-      ),
-      bid = 4d
-    ),
-    Campaign(id = 1000, country = "CHN", targeting = Targeting(targetedSiteIds = List("0006a522ce0f4bbbbaa6b3c38cafaa0f")), 
-      banners = List(Banner(id = 2, src = "https://business.eskimi.com/wp-content/uploads/2020/06/CHN.jpeg", width = 300, height = 250)
-    ),bid = 8d),
-    Campaign(id = 2000, country = "UK", targeting = Targeting(targetedSiteIds = List("0006a522ce0f4bbbbaa6b3c38cafaa0f")), 
-      banners = List(Banner(id = 3, src = "https://business.eskimi.com/wp-content/uploads/2020/06/UK.jpeg", width = 300, height = 250)
-    ),bid = 9d),
-    Campaign(id = 1500, country = "IN", targeting = Targeting(targetedSiteIds = List("0006a522ce0f4bbbbaa6b3c38cafaa0f")), 
-      banners = List(Banner(id = 1, src = "https://business.eskimi.com/wp-content/uploads/2020/06/openGraph.jpeg", width = 1300, height = 250)), 
-      bid = 8d),
-    Campaign(id = 3, country = "NEP", targeting = Targeting(targetedSiteIds = List("0006a522ce0f4bbbbaa6b3c38cafaa0f")), 
-      banners = List(Banner(id = 1, src = "https://business.eskimi.com/wp-content/uploads/2020/06/openGraph.jpeg", width = 3000, height = 2500)),
-      bid = 2d
-    ),
-    Campaign(id = 2001, country = "US", targeting = Targeting(targetedSiteIds = List("0006a522ce0f4bbbbaa6b3c38cafaa0f")), 
-      banners = List(Banner(id = 1, src = "https://business.eskimi.com/wp-content/uploads/2020/06/openGraph.jpeg", width = 3000, height = 2500)),
-      bid = 1d
-    )
-  )
-  // format: on
 
   //TODO this method is not part of a repository
   def validateAndGetMatchingBidCampaign(bidRequest: BidRequest): RouteResponse = {
@@ -58,7 +28,7 @@ object CampaignRepository {
   private def findMatchingBidCampaigns(bidRequest: BidRequest): RouteResponse = {
     val userGeo   = bidRequest.user.flatMap(_.geo.flatMap(_.country))
     val deviceGeo = bidRequest.user.flatMap(_.geo.flatMap(_.country))
-    val matchingCampaigns = activeCampaigns
+    val matchingCampaigns = DummyData.activeCampaigns
       .filter(_.targeting.targetedSiteIds.contains(bidRequest.site.id))
       .filter(_.bid >= bidRequest.imp.get.head.bidFloor.getOrElse(0.0))
       .map(x => x.copy(banners = x.banners.filter(bnr => bannerFilter(bnr, bidRequest))))

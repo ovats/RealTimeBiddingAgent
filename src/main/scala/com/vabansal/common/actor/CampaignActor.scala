@@ -2,7 +2,6 @@ package com.vabansal.common.actor
 
 import akka.actor.typed.{ActorRef, Behavior}
 import akka.actor.typed.scaladsl.Behaviors
-import akka.event.slf4j.Logger
 import com.vabansal.api.routes.RouteResponse
 import com.vabansal.common.db.CampaignRepository
 import com.vabansal.common.domain.Domain.BidRequest
@@ -10,7 +9,7 @@ import org.slf4j.LoggerFactory
 
 object CampaignActor {
 
-  private val logger = Logger.apply(CampaignActor.getClass, "")
+  private val logger = LoggerFactory.getLogger(getClass.getName)
 
   sealed trait Command
 

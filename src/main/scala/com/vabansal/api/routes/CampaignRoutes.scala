@@ -2,7 +2,6 @@ package com.vabansal.api.routes
 
 import akka.actor.typed.scaladsl.AskPattern.{Askable, _}
 import akka.actor.typed.{ActorRef, ActorSystem}
-import akka.event.slf4j.Logger
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
@@ -11,6 +10,7 @@ import com.vabansal.common.domain.Domain.BidRequest
 import com.vabansal.common.json.JsonFormats._
 import com.vabansal.common.actor.CampaignActor
 import com.vabansal.common.actor.CampaignActor.GetMatchingBidCampaign
+import org.slf4j.LoggerFactory
 
 import scala.concurrent.Future
 
@@ -20,7 +20,7 @@ class CampaignRoutes(campaignBiddingActor: ActorRef[CampaignActor.Command])(impl
 
   private implicit val timeout =
     Timeout.create(system.settings.config.getDuration("real-time-bidding-agent.routes.ask-timeout"))
-  private val logger = Logger.apply(this.getClass, "")
+  private val logger = LoggerFactory.getLogger(getClass.getName)
 
   private def getMatchingBidCampaign(bidRequest: BidRequest): Future[RouteResponse] = {
     campaignBiddingActor.ask(GetMatchingBidCampaign(bidRequest, _))

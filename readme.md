@@ -73,6 +73,8 @@ Also changed the name of the package to 'actor'.
 
 'StatusCodes' from 'Akka Http' is not related to domain at all.
 
+### (12) Little change when creating an instance of logger
+
 ## Original readme.md file
 
 1) Main Class is in Main.scala 

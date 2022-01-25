@@ -7,7 +7,7 @@ import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import akka.util.Timeout
-import com.vabansal.common.domain.Domain.{BidRequest, RouteResponse}
+import com.vabansal.common.domain.Domain.BidRequest
 import com.vabansal.common.json.JsonFormats._
 import com.vabansal.common.actor.CampaignActor
 import com.vabansal.common.actor.CampaignActor.GetMatchingBidCampaign

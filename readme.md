@@ -75,6 +75,8 @@ Also changed the name of the package to 'actor'.
 
 ### (12) Little change when creating an instance of logger
 
+### (13) Move data for unit tests to a separate object
+
 ## Original readme.md file
 
 1) Main Class is in Main.scala 

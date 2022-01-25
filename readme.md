@@ -77,6 +77,19 @@ Also changed the name of the package to 'actor'.
 
 ### (13) Move data for unit tests to a separate object
 
+### (14) New trait Repository
+
+Actual implementation of 'CampaignRepository' IMHO is wrong:
+    - only responsibility should be handle data in the repo
+    - contains code related to Akka Http
+    - contains code for validations, a better place would be in the service layer
+
+I've created a trait for Repositories and an implementation storing data in memory.
+This implementation is only for this exercise. Must be replace for another implementation i.e.:
+    - database
+    - file
+    - etc
+
 ## Original readme.md file
 
 1) Main Class is in Main.scala 

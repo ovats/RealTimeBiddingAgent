@@ -5,139 +5,21 @@ import akka.http.scaladsl.marshalling.Marshal
 import akka.http.scaladsl.model.{ContentTypes, MessageEntity, StatusCodes}
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import com.vabansal.api.routes.CampaignRoutes
-import com.vabansal.common.domain.Domain._
 import com.vabansal.common.actor.CampaignActor
+import com.vabansal.realTimeBiddingAgent.TestData.{invalidBidRequest, validBidRequest, validBidRequest2}
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
+import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
+import com.vabansal.common.json.JsonFormats._
 
 class CampaignRoutesSpec extends AnyWordSpec with Matchers with ScalaFutures with ScalatestRouteTest {
 
-  private lazy val testKit = ActorTestKit()
-
-  private implicit def typedSystem = testKit.system
-
+  private lazy val testKit                                 = ActorTestKit()
+  private implicit def typedSystem                         = testKit.system
   override def createActorSystem(): akka.actor.ActorSystem = testKit.system.classicSystem
-
-  //TODO move imports to the top
-  import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
-  import com.vabansal.common.json.JsonFormats._
-
-  private val campaignRegistry = testKit.spawn(CampaignActor())
-  private lazy val routes      = new CampaignRoutes(campaignRegistry).bidRoutes
-
-  private val validBidRequest = BidRequest(
-    id = "SGu1Jpq1IO",
-    site = Site(
-      id = "0006a522ce0f4bbbbaa6b3c38cafaa0f",
-      domain = "fake.tld",
-    ),
-    device = Some(
-      Device(
-        id = "440579f4b408831516ebd02f6e1c31b4",
-        geo = Some(
-          Geo(
-            country = Some("IN")
-          )
-        ),
-      )
-    ),
-    imp = Some(
-      List(
-        Impression(
-          id = "1",
-          wmin = Some(50),
-          wmax = Some(300),
-          hmin = Some(100),
-          hmax = Some(300),
-          h = Some(250),
-          w = Some(300),
-          bidFloor = Some(3.12123),
-        )
-      )
-    ),
-    user = Some(
-      User(
-        geo = Some(
-          Geo(
-            country = Some("IN")
-          )
-        ),
-        id = "USARIO1",
-      )
-    ),
-  )
-
-  private val validBidRequest2 = BidRequest(
-    id = "SGu1Jpq1IO",
-    site = Site(
-      id = "0006a522ce0f4bbbbaa6b3c38cafaa0f",
-      domain = "fake.tld",
-    ),
-    device = Some(
-      Device(
-        id = "440579f4b408831516ebd02f6e1c31b4",
-        geo = Some(
-          Geo(
-            country = Some("UK")
-          )
-        ),
-      )
-    ),
-    imp = Some(
-      List(
-        Impression(
-          id = "1",
-          wmin = Some(50),
-          wmax = Some(300),
-          hmin = Some(100),
-          hmax = Some(300),
-          h = Some(250),
-          w = Some(300),
-          bidFloor = Some(3.12123),
-        )
-      )
-    ),
-    user = Some(
-      User(
-        geo = Some(
-          Geo(
-            country = Some("CHN")
-          )
-        ),
-        id = "USARIO1",
-      )
-    ),
-  )
-
-  private val invalidBidRequest = BidRequest(
-    id = "SGu1Jpq1IO",
-    site = Site(
-      id = "0006a522ce0f4bbbbaa6b3c38cafaa0f",
-      domain = "fake.tld",
-    ),
-    device = Some(
-      Device(
-        id = "440579f4b408831516ebd02f6e1c31b4",
-        geo = Some(
-          Geo(
-            country = Some("UK")
-          )
-        ),
-      )
-    ),
-    imp = Some(List.empty),
-    user = Some(
-      User(
-        geo = Some(
-          Geo(
-            country = Some("CHN")
-          )
-        ),
-        id = "USARIO1",
-      )
-    ),
-  )
+  private val campaignRegistry                             = testKit.spawn(CampaignActor())
+  private lazy val routes                                  = new CampaignRoutes(campaignRegistry).bidRoutes
 
   "be able to bid campaign successfully" in {
     val bidRequestEntity = Marshal(validBidRequest).to[MessageEntity].futureValue
@@ -145,8 +27,6 @@ class CampaignRoutesSpec extends AnyWordSpec with Matchers with ScalaFutures wit
 
     request ~> routes ~> check {
       status should ===(StatusCodes.OK)
-
-      // we expect the response to be json:
       contentType should ===(ContentTypes.`application/json`)
 
       entityAs[String] should ===(
@@ -162,7 +42,6 @@ class CampaignRoutesSpec extends AnyWordSpec with Matchers with ScalaFutures wit
 
     request ~> routes ~> check {
       status should ===(StatusCodes.OK)
-
       contentType should ===(ContentTypes.`application/json`)
 
       entityAs[String] should ===(

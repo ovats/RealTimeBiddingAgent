@@ -72,6 +72,7 @@ object CampaignRepository {
 
   }
 
+  //TODO StatusCodes should not be part of a repository
   private def createEmptyCampaignResponse(): RouteResponse = {
     RouteResponse(StatusCodes.NoContent, None)
   }

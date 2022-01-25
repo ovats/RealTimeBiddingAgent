@@ -8,5 +8,5 @@ lazy val root = (project in file(".")).settings(
     )
   ),
   name := "real-time-bidding-agent",
-  libraryDependencies ++= Libraries.akkaDeps ++ Libraries.logDeps ++ Libraries.testDeps,
+  libraryDependencies ++= Libraries.akkaDeps ++ Libraries.logDeps ++ Libraries.testDeps ++ Libraries.configDeps,
 )

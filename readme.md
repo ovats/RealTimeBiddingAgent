@@ -92,6 +92,12 @@ This implementation is only for this exercise. Must be replace for another imple
 
 ### (15) Create an object to contain dummy data
 
+### (16) Add PureConfig library for managing config files
+
+In application.conf I've renamed `real-time-bidding-agent` for `app'.
+When the app starts it reads all the configuration. If something is wrong it will fail immediately.
+Before that the configuration is being read when needed. I like if it is going to fail, fail at startup.
+
 ## Original readme.md file
 
 1) Main Class is in Main.scala 

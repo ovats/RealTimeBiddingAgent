@@ -11,15 +11,18 @@ import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
+import com.vabansal.common.config.AppConfig
 import com.vabansal.common.json.JsonFormats._
 
 class CampaignRoutesSpec extends AnyWordSpec with Matchers with ScalaFutures with ScalatestRouteTest {
 
-  private lazy val testKit                                 = ActorTestKit()
-  private implicit def typedSystem                         = testKit.system
+  private lazy val testKit         = ActorTestKit()
+  private implicit def typedSystem = testKit.system
+  private val campaignRegistry     = testKit.spawn(CampaignActor())
+  private val config               = AppConfig()
+  private lazy val routes          = new CampaignRoutes(campaignRegistry, config).bidRoutes
+
   override def createActorSystem(): akka.actor.ActorSystem = testKit.system.classicSystem
-  private val campaignRegistry                             = testKit.spawn(CampaignActor())
-  private lazy val routes                                  = new CampaignRoutes(campaignRegistry).bidRoutes
 
   "be able to bid campaign successfully" in {
     val bidRequestEntity = Marshal(validBidRequest).to[MessageEntity].futureValue

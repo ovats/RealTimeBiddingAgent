@@ -90,6 +90,8 @@ This implementation is only for this exercise. Must be replace for another imple
     - file
     - etc
 
+### (15) Create an object to contain dummy data
+
 ## Original readme.md file
 
 1) Main Class is in Main.scala 

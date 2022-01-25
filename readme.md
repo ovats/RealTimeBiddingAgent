@@ -69,6 +69,10 @@ Also in `Domain` object is not a good idea to mention `StatusCodes` from `Akka H
 I have renamed class 'CampaignBiddingService' because it is an Actor.
 Also changed the name of the package to 'actor'.
 
+### (11) Remove Akka Http StatusCodes from domain
+
+'StatusCodes' from 'Akka Http' is not related to domain at all.
+
 ## Original readme.md file
 
 1) Main Class is in Main.scala 

@@ -2,6 +2,7 @@ package com.vabansal.common.db
 
 import akka.event.slf4j.Logger
 import akka.http.scaladsl.model.StatusCodes
+import com.vabansal.api.routes.RouteResponse
 import com.vabansal.common.domain.Domain._
 
 object CampaignRepository {

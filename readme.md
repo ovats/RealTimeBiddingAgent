@@ -98,6 +98,8 @@ In application.conf I've renamed `real-time-bidding-agent` for `app'.
 When the app starts it reads all the configuration. If something is wrong it will fail immediately.
 Before that the configuration is being read when needed. I like if it is going to fail, fail at startup.
 
+### (17) Add some useful scala options in build.sbt
+
 ## Original readme.md file
 
 1) Main Class is in Main.scala 
